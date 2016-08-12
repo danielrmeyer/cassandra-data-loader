@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: org.caffinitas.ohc:ohc-core:0.4.3:jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib_managed/jars/org.caffinitas.ohc/ohc-core/ohc-core-0.4.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib_managed/srcs/org.caffinitas.ohc/ohc-core/ohc-core-0.4.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

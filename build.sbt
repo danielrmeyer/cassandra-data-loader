@@ -7,7 +7,7 @@ scalaVersion := "2.10.6"
 mainClass in (Compile, run) := Some("org.sws9f.caxloader.CsvToSSTableWriter")
 
 // Cassandra
-libraryDependencies += "org.apache.cassandra" % "cassandra-all" % "3.0.2" exclude ("ch.qos.logback", "logback-classic") exclude ("org.slf4j", "log4j-over-slf4j")
+libraryDependencies += "org.apache.cassandra" % "cassandra-all" % "3.0.8" exclude ("ch.qos.logback", "logback-classic") exclude ("org.slf4j", "log4j-over-slf4j")
 libraryDependencies += "com.datastax.cassandra" % "cassandra-driver-core" % "3.0.0"
 
 // utility : CSV

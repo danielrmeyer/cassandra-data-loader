@@ -52,6 +52,10 @@ object CsvToSSTableWriter extends App {
                                                   .forTable(scriptCreateTable)
                                                   .using(scriptInsert).build();
     val epochMiddle = scala.math.pow(2,31).toInt + 1
+    implicit object MyFormat extends DefaultCSVFormat {
+      override val delimiter = '|'
+    }
+
     val reader = CSVReader.open(cfg.csv)
     
     try {
