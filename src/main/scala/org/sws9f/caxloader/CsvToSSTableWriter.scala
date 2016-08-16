@@ -12,7 +12,7 @@ import org.slf4j.{Logger,LoggerFactory}
 object CsvToSSTableWriter extends App {
   val log = LoggerFactory.getLogger(this.getClass)
   
-  case class Config(keyspace:String = "", table:String="", columns:Seq[(String,String)] = Seq(), pk:String="", csv:String="", output:String="", dryRun:Boolean=false)
+  case class Config(keyspace:String = "", table:String="", columns:Seq[(String,String)] = Seq(), pk:String="", csv:String="", output:String="", dryRun:Boolean=false, delimiter:String=",")
   
   val parser = new scopt.OptionParser[Config]("scopt") {
     head("scopt", "1.0")
@@ -30,6 +30,8 @@ object CsvToSSTableWriter extends App {
       c.copy(dryRun = x) } text("dry run, only output CREATE TABLE/INSERT ROW scripts")
     opt[Seq[(String,String)]]('c', "columns") required() action { (x,c) =>
       c.copy(columns = x) } text("columns name & data-type")
+    opt[String]('s', "delimiter") action { (x,c) =>
+      c.copy(delimiter = x) } text("delimiter used in csv file")
   }
   
   val cfgOption = parser.parse(args, Config())
@@ -52,8 +54,9 @@ object CsvToSSTableWriter extends App {
                                                   .forTable(scriptCreateTable)
                                                   .using(scriptInsert).build();
     val epochMiddle = scala.math.pow(2,31).toInt + 1
+    val csv_delimiter = cfg.delimiter.toArray
     implicit object MyFormat extends DefaultCSVFormat {
-      override val delimiter = '|'
+      override val delimiter = csv_delimiter(0)
     }
 
     val reader = CSVReader.open(cfg.csv)
